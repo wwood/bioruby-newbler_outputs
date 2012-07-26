@@ -10,3 +10,5 @@
 
 require 'bio-newbler_outputs/newbler_outputs.rb'
 
+require 'bio-logger'
+Bio::Log::LoggerPlus.new('bio-newbler_outputs')

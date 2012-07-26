@@ -40,4 +40,29 @@ describe "BioNewblerOutputs" do
       hash.to_a[1][1].coverage.should eq(16.0)
     end
   end
+  
+  it 'test ok on realish data' do
+    file = File.join(File.dirname(__FILE__),'data','500.test.454AlignmentInfo.tsv')
+    hash = Bio::Newbler::AlignmentInfoFile.contig_hash(file)
+    hash.length.should eq(42)
+  end
+  
+  it 'contig_hash should compute median coverage properly' do
+    contig = Bio::Newbler::Contig.new
+    expect {contig.median_coverage}.to raise_error
+    
+    contig.coverage_profile = [1,2,3]
+    contig.median_coverage.should eq(2.0)
+    
+    contig.coverage_profile = [1,2,3,4]
+    contig.median_coverage.should eq(2.5)
+  end
+  
+  it 'should contig_hash median on realish data' do
+    file = File.join(File.dirname(__FILE__),'data','500.test.454AlignmentInfo.tsv')
+    hash = Bio::Newbler::AlignmentInfoFile.contig_hash(file)
+    hash['contig00001'].median_coverage.should eq(13.0)
+    hash['contig00012'].median_coverage.should eq(10.0)
+  end
+  
 end
