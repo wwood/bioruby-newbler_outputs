@@ -9,6 +9,8 @@
 # In this file only require other files. Avoid other source code.
 
 require 'bio-newbler_outputs/newbler_outputs.rb'
+require 'bio-newbler_outputs/alignment_info_file'
+require 'bio-newbler_outputs/contig_graph_file'
 
 require 'bio-logger'
 Bio::Log::LoggerPlus.new('bio-newbler_outputs')
